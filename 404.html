@@ -10,7 +10,7 @@
 
 <h1 class="text" style="font-size:20px; color:green">shadowsocks个人代理解决方案</h1>
 	 <br><br>
-	<p style="font-size:12px; ">首先要有一台拥有外网公网IP地址的以CentOS主机为例。
+	<p style="font-size:12px; ">首先要有一台拥有外网公网IP地址的以CentOS主机为例。<br>
 		<br><br>
 然后输入以下命令依次安装下面两应用<br><br>
 
@@ -46,7 +46,8 @@ vi /etc/shadowsocks.json
     "fast_open":false<br>
 }
 		<br><br>
-其中"password"连接服务器时的root密码,其他保持默认即可<br><br>
+其中"password"连接服务器时的root密码，<br>
+		其他保持默认即可<br><br>
 
 然后运行：<br><br>
 ssserver -c /etc/shadowsocks.json -d start    #开启代理服务
@@ -55,7 +56,8 @@ ssserver -c /etc/shadowsocks.json -d start    #开启代理服务
 并在服务器后台放行"8388"端口
 		<br><br>
 
-安装时需要关闭本地防火墙并打开云防火墙，不用修改json文件，直接复制即可。</p><br><br>
+安装时需要关闭本地防火墙并打开云防火墙，<br>
+		不用修改json文件，直接复制即可。</p><br><br>
 
 	<p><a href="/" >返回主页</a></p><br><br><br><br><br>
 	
