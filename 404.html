@@ -4,16 +4,49 @@
 <html>
   <head>
   </head>
-  <title>放牛 </title>
+  <title>放牛娃 </title>
   <body >
  <div class="text" style="text-align:left;padding-left:750px;">
 
-<h1 class="text" style="font-size:30px; color:green">老铁！走错了没有这个页面</h1>
-	
+<h1 class="text" style="font-size:20px; color:green">shadowsocks个人代理方案修正版</h1>
+	<p style="font-size:15px; color:green">首先要有一台拥有外网公网IP地址的以CentOS主机为例。
+然后输入以下命令依次安装下面两应用
+
+yum install python-pip
+
+pip install shadowsocks
+
+以下命令创建json文件并写入规则
+
+vi /etc/shadowsocks.json
+
+复制下面的东西进入json文件：
+
+接着打开U盘里面的4.0.9版本的shadowsocks客户端，输入上面那些东西配套的信息就行了，就能用了。
+ 输入“”i“”写入，完成后按EDC键返回 输入“”:wq“”退出
+这个是可以用的的json文件。
+{
+    "server":"0.0.0.0",
+    "server_port":8388,
+    "local_address":"127.0.0.1",
+    "local_port":1080,
+    "password":"Jiang111",
+    "timeout":300,
+    "method":"aes-256-cfb",
+    "fast_open":false
+}
+其中"password"连接服务器时的root密码,其他默认即可
+
+然后运行：
+ssserver -c /etc/shadowsocks.json -d start    #开启代理服务
+
+并在服务器后台放行"8388"端口
+
+安装时需要关闭本地防火墙并打开云防火墙，不用修改json文件，直接复制即可。</p>
 
 	<p><a href="/" >返回主页</a></p><br><br><br><br><br>
 	
-	<p2 class="text" style="font-size:10px; color:green" >@2019-2021 Powered by fangniu.top</p1>
+	<p2 class="text" style="font-size:10px; color:green" >@2019一个无聊的网页</p2>
 
   </body>
 </html>
