@@ -8,7 +8,7 @@
   <body >
  <div class="text" style="text-align:left;padding-left:10px;">
 
-<h1 class="text" style="font-size:20px; color:green">shadowsocks个人代理方案修正版</h1>
+<h1 class="text" style="font-size:20px; color:green">shadowsocks个人代理解决方案</h1>
 	 <br><br>
 	<p style="font-size:12px; ">首先要有一台拥有外网公网IP地址的以CentOS主机为例。
 		<br><br>
@@ -29,21 +29,21 @@ vi /etc/shadowsocks.json
 复制下面的东西进入json文件：
 		<br><br>
 
-接着打开U盘里面的4.0.9版本的shadowsocks客户端，输入上面那些东西配套的信息就行了，就能用了。
+
 		<br><br>
  输入“”i“”写入，完成后按EDC键返回 输入“”:wq“”退出
 		<br><br>
 这个是可以用的的json文件。
 		<br><br>
 {
-    "server":"0.0.0.0",
-    "server_port":8388,
-    "local_address":"127.0.0.1",
-    "local_port":1080,
-    "password":"Jiang111",
-    "timeout":300,
-    "method":"aes-256-cfb",
-    "fast_open":false
+    "server":"0.0.0.0",<br>
+    "server_port":8388,<br>
+    "local_address":"127.0.0.1",<br>
+    "local_port":1080,<br>
+    "password":"12345678",<br>
+    "timeout":300,<br>
+    "method":"aes-256-cfb",<br>
+    "fast_open":false<br>
 }
 		<br><br>
 其中"password"连接服务器时的root密码,其他保持默认即可<br><br>
