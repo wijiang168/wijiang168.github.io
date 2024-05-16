@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>一个不为人知的角落</title>
+<style>
+*{margin:0;padding:0;color:#444}
+body{font-size:14px;font-family:"宋体"}
+.main{width:600px;margin:5% auto;}
+.title{background: #20a53a;color: #fff;font-size: 16px;height: 40px;line-height: 40px;padding-left: 20px;}
+.content{background-color:#f3f7f9; height:auto;border:1px dashed #c6d9b6;padding:20px}
+.t1{border-bottom: 1px dashed #c6d9b6;color: green;font-weight: bold; margin: 0 0 20px; padding-bottom: 20px;font-size:20px;}
+.t2{margin-bottom:8px; font-weight:bold}
+li {line-height:20px;list-style-type: none;}
+  </style>
+</head>
+
+<body>
+	<div class="main">
+		
+		<div class="content">
+			<p class="t1">shadowsocks个人代理解决方案</p>
+			
+		
+				<li>首先要有一台拥有外网公网IP地址的CentOS主机为例</li>
+				<li>ssh连接服务器,然后输入以下命令依次安装下面两应用:</li>
+			          <li>yum install python-pip</li>
+                                 <li>pip install shadowsocks</li>
+                                    <li>以下命令创建json文件并写入规则</li>
+                                     <li>vi /etc/shadowsocks.json</li>
+                                      <li>复制下面的东西进入json文件：</li>
+<li>{</li>
+<li>    "server":"0.0.0.0",</li>
+<li>    "server_port":8388,</li>
+<li>    "local_address":"127.0.0.1",</li>
+<li>    "local_port":1080,</li>
+<li>    "password":"12345678",</li>
+<li>    "timeout":300,</li>
+<li>    "method":"aes-256-cfb",</li>
+<li>    "fast_open":false</li>
+<li>}</li>
+<li>输入"i"写入，完成后按EDC键返回 输入":wq"退出</li>
+<li>其中"password"修改ssh连接服务器时的root密码，其他保持默认即可</li>
+<li>然后运行：</li>
+<li>ssserver -c /etc/shadowsocks.json -d start </li>
+<li>开启代理服务</li>
+<li>并在服务器后台放行"8388"端口</li>
+<li>下载客户端配置服务器ip地址,和服务器密码即可	</li>
+<br><br>
+			<p class="t2">本地下载：</p>
+			
+				<li><a  href="/Shadowsocks-4.0.9.zip"> windows版本Shadowsocks下载</a></li>
+				<li><a href="/shadowsocks-universal-5.3.3.apk"> Android版本Shadowsocks下载 </a></li>
+				<br><br>
+<p2 class="text" style="font-size:12px; color:green" >@移动端请使用edge或google浏览器食用</p2>
+
+			</div>
+</body>
+</html>
