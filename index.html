@@ -55,7 +55,12 @@ alert("欢迎光临…！")
 <li>然后运行：</li>
 <li>ssserver -c /etc/shadowsocks.json -d start </li>
 <li>开启代理服务</li>
-<li>并在服务器后台放行"8388"端口</li>
+<li>并放行服务器"8388"端口</li>
+firewall-cmd --zone=public --add-port=8388/tcp --permanent
+<li> 或关闭</li>
+firewall-cmd --zone=public --remove-port=8388/tcp --permanent
+<li> 立即执行</li>
+firewall-cmd --reload
 <li>下载客户端配置服务器ip地址,和服务器密码即可	</li>
 <br><br>
 			<p class="t2">本地下载：</p>	<br>
