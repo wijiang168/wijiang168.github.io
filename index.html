@@ -165,7 +165,25 @@
                 searchInput.focus();
             }
         });
+//添加搜索引擎持久化
+        const searchEngine = localStorage.getItem('searchEngine');
+        if (searchEngine) {
+            currentEngine = searchEngine;
+            engineBtns.forEach(btn => {
+                if (btn.dataset.engine === searchEngine) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            searchForm.action = engines[searchEngine].action;
+            searchInput.name = engines[searchEngine].name;
+        }
 
+        searchForm.addEventListener('submit', () => {
+            localStorage.setItem('searchEngine', currentEngine);
+        });
+ 
         // 监听系统主题变化
 const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -197,3 +215,4 @@ prefersDarkScheme.addEventListener('change', updateTheme);
 </body>
 
 </html>
+
