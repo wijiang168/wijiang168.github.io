@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>搜索</title>
     <style>
+        /* 消除body自动边框 */
         * {
   margin: 0;
   padding: 0;
@@ -47,7 +48,7 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            max-width: 600px;
+            max-width: 650px;
             padding: 20px;
         }
 
@@ -55,7 +56,7 @@
     flex: 1;
     padding: 12px;
     border: 1px solid var(--border-color);
-    border-radius: 20px;
+    border-radius: 25px;
     font-size: 16px;
     background-color: var(--input-bg);
     color: var(--text-color);
@@ -68,11 +69,11 @@
 
 
       .search-btn {
-    padding: 10px 20px;
+    padding: 10px 25px;
     background-color: var(--primary-color);
     color: #fff;
     border: none;
-    border-radius: 20px;
+    border-radius: 25px;
     font-size: 16px;
     cursor: pointer;
     margin-left: 10px;
@@ -83,51 +84,38 @@
 }
 
 
-/* 搜索引擎按钮样式 */
-        .search-engine {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            max-width: 600px;
-            padding: 20px;
-        }
-
-     .engine-btn {
-    padding: 10px 20px;
-    background-color: var(--input-bg);
-    color: var(--text-color);
+/* 搜索引擎下拉框样式 */
+        .search-engine-select {
+    padding: 12px 5px;
     border: 1px solid var(--border-color);
-    border-radius: 20px;
-    font-size: 16px;
+    background-color: var(--input-bg);
     cursor: pointer;
-    margin: 0 5px;
+    margin-right: 5px;
+    outline: none;
 }
 
-.engine-btn.active {
-    background-color: var(--primary-color);
-    color: #fff;
+.search-engine-select:focus {
+    border-color: var(--primary-color);
 }
 
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- <div class="logo">搜索</div> -->
         <form class="search-box" id="searchForm" action="https://cn.bing.com/search" method="GET">
+            <select class="search-engine-select" id="searchEngineSelect">
+                <option value="bing">B</option>
+                <option value="google">G</option>
+            </select>
             <input type="text" class="search-input" id="searchInput" name="q" placeholder="输入搜索内容..." autocomplete="off">
             <button type="submit" class="search-btn">搜索</button>
         </form>
-        <div class="search-engine">
-            <button class="engine-btn  active" data-engine="bing">Bing</button>
-            <button class="engine-btn " data-engine="google">Google</button>
-        </div>
     </div>
 
     <script>
         const searchForm = document.getElementById('searchForm');
         const searchInput = document.getElementById('searchInput');
-        const engineBtns = document.querySelectorAll('.engine-btn');
+        const searchEngineSelect = document.getElementById('searchEngineSelect');
 
         const engines = {
             google: {
@@ -142,17 +130,12 @@
 
         let currentEngine = 'google';
 
-        engineBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const engine = btn.dataset.engine;
-                currentEngine = engine;
+        searchEngineSelect.addEventListener('change', () => {
+            const engine = searchEngineSelect.value;
+            currentEngine = engine;
 
-                engineBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                searchForm.action = engines[engine].action;
-                searchInput.name = engines[engine].name;
-            });
+            searchForm.action = engines[engine].action;
+            searchInput.name = engines[engine].name;
         });
 
         searchForm.addEventListener('submit', (e) => {
@@ -161,17 +144,11 @@
                 searchInput.focus();
             }
         });
-//添加搜索引擎持久化
+   //添加搜索引擎持久化
         const searchEngine = localStorage.getItem('searchEngine');
         if (searchEngine) {
             currentEngine = searchEngine;
-            engineBtns.forEach(btn => {
-                if (btn.dataset.engine === searchEngine) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
+            searchEngineSelect.value = searchEngine;
             searchForm.action = engines[searchEngine].action;
             searchInput.name = engines[searchEngine].name;
         }
@@ -180,6 +157,8 @@
             localStorage.setItem('searchEngine', currentEngine);
         });
  
+        
+
         // 监听系统主题变化
 const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -209,8 +188,4 @@ prefersDarkScheme.addEventListener('change', updateTheme);
 
     </script>
 </body>
-
 </html>
-
-
-
