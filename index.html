@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索</title>
+    <style>
+        /* 消除body自动边框 */
+        * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+       :root {
+    --bg-color: #f0f0f0;
+    --input-bg: #fff;
+    --text-color: #333;
+    --border-color: #ccc;
+    --primary-color: #007bff;
+    --btn-hover-color: #0056b3;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1a1a1a;
+        --input-bg: #2d2d2d;
+        --text-color: #e0e0e0;
+        --border-color: #404040;
+        --primary-color: #4dabf7;
+        --btn-hover-color: #339af0;
+    }
+}
+
+/* 搜索居中 */
+     .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: var(--bg-color);
+}
+
+
+/* 搜索框样式 */
+        .search-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            /* background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+        }
+
+       .search-input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+      .search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+
+      .search-btn {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.search-btn:hover {
+    background-color: var(--btn-hover-color);
+}
+
+
+/* 搜索引擎按钮样式 */
+        .search-engine {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+     .engine-btn {
+    padding: 10px 20px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.engine-btn.active {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- <div class="logo">搜索</div> -->
+        <form class="search-box" id="searchForm" action="https://www.google.com/search" method="GET">
+            <input type="text" class="search-input" id="searchInput" name="q" placeholder="输入搜索内容..." autocomplete="off">
+            <button type="submit" class="search-btn">搜索</button>
+        </form>
+        <div class="search-engine">
+            <button class="engine-btn  active" data-engine="bing">Bing</button>
+            <button class="engine-btn " data-engine="google">Google</button>
+        </div>
+    </div>
+
+    <script>
+        const searchForm = document.getElementById('searchForm');
+        const searchInput = document.getElementById('searchInput');
+        const engineBtns = document.querySelectorAll('.engine-btn');
+
+        const engines = {
+            google: {
+                action: 'https://www.google.com/search',
+                name: 'q'
+            },
+            bing: {
+                action: 'https://www.bing.com/search',
+                name: 'q'
+            }
+        };
+
+        let currentEngine = 'google';
+
+        engineBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const engine = btn.dataset.engine;
+                currentEngine = engine;
+
+                engineBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                searchForm.action = engines[engine].action;
+                searchInput.name = engines[engine].name;
+            });
+        });
+
+        searchForm.addEventListener('submit', (e) => {
+            if (!searchInput.value.trim()) {
+                e.preventDefault();
+                searchInput.focus();
+            }
+        });
+
+        // 监听系统主题变化
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+function updateTheme() {
+    if (prefersDarkScheme.matches) {
+        document.documentElement.style.setProperty('--bg-color', '#1a1a1a');
+        document.documentElement.style.setProperty('--input-bg', '#2d2d2d');
+        document.documentElement.style.setProperty('--text-color', '#e0e0e0');
+        document.documentElement.style.setProperty('--border-color', '#404040');
+        document.documentElement.style.setProperty('--primary-color', '#4dabf7');
+        document.documentElement.style.setProperty('--btn-hover-color', '#339af0');
+    } else {
+        document.documentElement.style.setProperty('--bg-color', '#f0f0f0');
+        document.documentElement.style.setProperty('--input-bg', '#fff');
+        document.documentElement.style.setProperty('--text-color', '#333');
+        document.documentElement.style.setProperty('--border-color', '#ccc');
+        document.documentElement.style.setProperty('--primary-color', '#007bff');
+        document.documentElement.style.setProperty('--btn-hover-color', '#0056b3');
+    }
+}
+
+// 初始化主题
+updateTheme();
+
+// 监听主题变化
+prefersDarkScheme.addEventListener('change', updateTheme);
+
+    </script>
+</body>
+</html>
